@@ -27,7 +27,7 @@ elif [[ $(uname -s) == Linux* ]]; then
   # if Python3 version is one of 3.8 or 3.9 or 3.10, then install puffinn
   if [[ $(python3 --version 2>&1) == "Python 3.8"* ]] ||
      [[ $(python3 --version 2>&1) == "Python 3.9"* ]] ||
-     [[ $(python3 --version 2>&1) == "Python 3.10"* ]] ||; then
+     [[ $(python3 --version 2>&1) == "Python 3.10"* ]]; then
     echo "Python3 version is below 3.11 or above. Installing puffinn."
     git clone https://github.com/puffinn/puffinn.git
     cd puffinn

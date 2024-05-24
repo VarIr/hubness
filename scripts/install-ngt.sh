@@ -17,6 +17,9 @@ if [[ $(uname) == "Darwin" ]]; then
     brew install libomp
     export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
     export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
+    brew install gcc@13
+    export CC=/opt/homebrew/bin/gcc-13
+    export CXX=/opt/homebrew/bin/g++-13
     pushd /tmp/
     git clone https://github.com/yahoojapan/NGT
     cd NGT/
