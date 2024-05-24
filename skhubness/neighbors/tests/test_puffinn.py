@@ -20,8 +20,10 @@ elif sys.platform == "darwin":
     # Work-around for imprecise Puffinn on Mac: disable tests for now
     pass
 elif sys.platform == "linux":
-    LSH_LEGACY_KNN.append(LegacyPuffinn)
-    LSH_TRAFO_KNN.append(PuffinnTransformer)
+    # LSH_LEGACY_KNN.append(LegacyPuffinn)
+    # LSH_TRAFO_KNN.append(PuffinnTransformer)
+    # Could not compile Puffinn recently (2024), so disabling tests for now
+    pass
 LSH_LEGACY = set(LSH_LEGACY_KNN + LSH_LEGACY_RADIUS)
 LSH_TRAFO = set(LSH_TRAFO_KNN + LSH_TRAFO_RADIUS)
 LSH_ALL = LSH_LEGACY.union(LSH_TRAFO)

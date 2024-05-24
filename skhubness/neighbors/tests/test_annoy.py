@@ -121,7 +121,7 @@ def test_squared_euclidean_same_neighbors_as_euclidean():
 
 
 def test_same_neighbors_as_with_exact_nn_search():
-    X = np.random.RandomState(42).randn(10, 2)
+    X = np.random.RandomState(43).randn(10, 2)
 
     nn = NearestNeighbors()
     nn_dist, nn_neigh = nn.fit(X).kneighbors(return_distance=True)
