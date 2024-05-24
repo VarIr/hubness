@@ -14,9 +14,7 @@ if [[ $(uname) == "Darwin" ]]; then
     echo "Installing NGT under Mac OS X..."
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install cmake
-    brew install gcc@9
-    export CXX=/usr/local/bin/g++-9
-    export CC=/usr/local/bin/gcc-9
+    brew install libomp
     pushd /tmp/
     git clone https://github.com/yahoojapan/NGT
     cd NGT/
