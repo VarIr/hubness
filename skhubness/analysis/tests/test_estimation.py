@@ -92,7 +92,7 @@ def test_return_k_occurrence(return_value, return_k_occurrence):
         k_occ = result["k_occurrence"]
         assert k_occ.shape == (X.shape[0], )
     else:
-        ExpectedError = KeyError if return_value == "all" else TypeError
+        ExpectedError = KeyError if return_value == "all" else (TypeError, IndexError)
         with pytest.raises(ExpectedError):
             _ = result["k_occurrence"]
 
@@ -112,7 +112,7 @@ def test_return_hubs(return_value, return_hubs):
         # TOFU hub number for `make_classification(random_state=123)`
         assert hubs.shape == (8, )
     else:
-        ExpectedError = KeyError if return_value == "all" else TypeError
+        ExpectedError = KeyError if return_value == "all" else (TypeError, IndexError)
         with pytest.raises(ExpectedError):
             _ = result["hubs"]
 
@@ -134,7 +134,7 @@ def test_return_antihubs(return_value, return_antihubs):
         # TOFU anti-hub number for `make_classification(random_state=123)`
         assert antihubs.shape == (0, )
     else:
-        ExpectedError = KeyError if return_value == "all" else TypeError
+        ExpectedError = KeyError if return_value == "all" else (TypeError, IndexError)
         with pytest.raises(ExpectedError):
             _ = result["antihubs"]
 

@@ -7,12 +7,13 @@ set -e
 # Check for the operating system and install puffinn
 if [[ $(uname) == "Darwin" ]]; then
   echo "Running under Mac OS X..."
-  git clone https://github.com/puffinn/puffinn.git
-  cd puffinn
-  python3 setup.py build
-  pip install .
-  cd ..
-  rm -r puffinn
+  echo "...skipping puffinn installation for unresolved compilation issues."
+  #  git clone https://github.com/puffinn/puffinn.git
+  #  cd puffinn
+  #  python3 setup.py build
+  #  pip install .
+  #  cd ..
+  #  rm -r puffinn
 
 elif [[ $(uname -s) == Linux* ]]; then
   echo "Running under Linux..."
@@ -24,12 +25,20 @@ elif [[ $(uname -s) == Linux* ]]; then
   #    python3 setup.py build;\
   #    pip install . ;\
   #    cd ..)
-  git clone https://github.com/puffinn/puffinn.git
-  cd puffinn
-  python3 setup.py build
-  pip install .
-  cd ..
-  rm -r puffinn
+  # if Python3 version is one of 3.8 or 3.9 or 3.10, then install puffinn
+  if [[ $(python3 --version 2>&1) == "Python 3.8"* ]] ||
+     [[ $(python3 --version 2>&1) == "Python 3.9"* ]] ||
+     [[ $(python3 --version 2>&1) == "Python 3.10"* ]]; then
+    echo "Python3 version is below 3.11 or above. Installing puffinn."
+    git clone https://github.com/puffinn/puffinn.git
+    cd puffinn
+    python3 setup.py build
+    pip install .
+    cd ..
+    rm -r puffinn
+  else
+    echo "Python3 version is not 3.8, 3.9, or 3.10. Skipping puffinn installation."
+  fi
 
 elif [[ $(uname -s) == MINGW32_NT* ]]; then
   echo "Running under Win x86-32"

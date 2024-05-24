@@ -20,8 +20,10 @@ elif sys.platform == "darwin":
     # Work-around for imprecise Puffinn on Mac: disable tests for now
     pass
 elif sys.platform == "linux":
-    LSH_LEGACY_KNN.append(LegacyPuffinn)
-    LSH_TRAFO_KNN.append(PuffinnTransformer)
+    # LSH_LEGACY_KNN.append(LegacyPuffinn)
+    # LSH_TRAFO_KNN.append(PuffinnTransformer)
+    # Could not compile Puffinn recently (2024), so disabling tests for now
+    pass
 LSH_LEGACY = set(LSH_LEGACY_KNN + LSH_LEGACY_RADIUS)
 LSH_TRAFO = set(LSH_TRAFO_KNN + LSH_TRAFO_RADIUS)
 LSH_ALL = LSH_LEGACY.union(LSH_TRAFO)
@@ -133,6 +135,7 @@ def test_invalid_metric(LSH, metric):
         lsh.fit(X)
 
 
+@pytest.mark.skipif(sys.version_info >= (3, 11), reason="Python 3.11+ is not supported by Puffinn.")
 @pytest.mark.skipif(sys.platform == "win32", reason="Puffinn not supported on Windows.")
 def test_puffinn_lsh_custom_memory():
     # If user decides to set memory, this value should be selected,
@@ -145,6 +148,7 @@ def test_puffinn_lsh_custom_memory():
     assert lsh.memory == memory
 
 
+@pytest.mark.skipif(sys.version_info >= (3, 11), reason="Python 3.11+ is not supported by Puffinn.")
 @pytest.mark.skipif(sys.platform == "win32", reason="Puffinn not supported on Windows.")
 @pytest.mark.parametrize("metric", ["angular", "jaccard"])
 def test_transformer_vs_legacy_puffinn(metric):
