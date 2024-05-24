@@ -15,6 +15,8 @@ if [[ $(uname) == "Darwin" ]]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     brew install cmake
     brew install libomp
+    export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
+    export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
     pushd /tmp/
     git clone https://github.com/yahoojapan/NGT
     cd NGT/
