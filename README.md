@@ -6,10 +6,6 @@ https://scikit-hubness.readthedocs.io/en/latest/?badge=latest)
 https://github.com/VarIr/scikit-hubness/actions/workflows/scikit-hubness_ci.yml)
 [![Coverage](https://codecov.io/gh/VarIr/scikit-hubness/branch/master/graph/badge.svg?branch=master)](
 https://codecov.io/gh/VarIr/scikit-hubness)
-[![Quality](https://img.shields.io/lgtm/grade/python/g/VarIr/scikit-hubness.svg?logo=lgtm&logoWidth=18)](
-https://lgtm.com/projects/g/VarIr/scikit-hubness/context:python)
-[![License](https://img.shields.io/github/license/VarIr/scikit-hubness.svg)](
-https://github.com/VarIr/scikit-hubness/blob/master/LICENSE.txt)
 [![DOI](https://zenodo.org/badge/193863864.svg)](
 https://zenodo.org/badge/latestdoi/193863864)
 [![arXiv](https://img.shields.io/badge/cs.LG-arXiv%3A1912.00706-B31B1B)](
