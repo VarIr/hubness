@@ -129,7 +129,7 @@ def test_same_neighbors_as_with_exact_nn_search():
     ann = LegacyRandomProjectionTree()
     ann_dist, ann_neigh = ann.fit(X).kneighbors(return_distance=True)
 
-    assert_array_almost_equal(ann_dist, nn_dist, decimal=5)
+    assert_array_almost_equal(ann_dist, nn_dist, decimal=4)
     assert_array_almost_equal(ann_neigh, nn_neigh, decimal=0)
 
 

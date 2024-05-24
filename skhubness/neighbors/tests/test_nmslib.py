@@ -107,6 +107,9 @@ def test_all_metrics(metric, dtype):
     sparse = False
     if "_sparse" in metric:
         sparse = True
+        if dtype == np.float16:
+            # See https://github.com/scipy/scipy/issues/7408
+            pytest.skip("Scipy sparse matrices do not support float16")
     kwargs = {}
     if metric.startswith("lp"):
         kwargs.update({"p": 1.5})

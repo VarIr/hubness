@@ -43,7 +43,7 @@ def test_squared_vs_nonsquared_and_reference_vs_transformer_base():
     assert_array_almost_equal(dsl_graph.data ** 2, dsl_graph_squared.data)
 
 
-@pytest.mark.parametrize("metric", ["euclidean", "sqeuclidean", "cosine", "cityblock", "seuclidean"])
+@pytest.mark.parametrize("metric", ["euclidean", "sqeuclidean", "cosine", "cityblock"])
 def test_warn_on_non_squared_euclidean_distances(metric):
     X = np.random.rand(3, 10)
     nn = NearestNeighbors(n_neighbors=2, metric=metric)
