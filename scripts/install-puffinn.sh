@@ -7,12 +7,13 @@ set -e
 # Check for the operating system and install puffinn
 if [[ $(uname) == "Darwin" ]]; then
   echo "Running under Mac OS X..."
-  git clone https://github.com/puffinn/puffinn.git
-  cd puffinn
-  python3 setup.py build
-  pip install .
-  cd ..
-  rm -r puffinn
+  echo "...skipping puffinn installation for unresolved compilation issues."
+  #  git clone https://github.com/puffinn/puffinn.git
+  #  cd puffinn
+  #  python3 setup.py build
+  #  pip install .
+  #  cd ..
+  #  rm -r puffinn
 
 elif [[ $(uname -s) == Linux* ]]; then
   echo "Running under Linux..."

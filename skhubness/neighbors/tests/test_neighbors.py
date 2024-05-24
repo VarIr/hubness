@@ -19,6 +19,8 @@ from skhubness.neighbors import AnnoyTransformer, NGTTransformer, NMSlibTransfor
 def test_ann_transformers_similar_to_exact_transformer(ApproximateNNTransformer, n_neighbors, metric):
     if sys.platform == "win32" and issubclass(ApproximateNNTransformer, (NGTTransformer, PuffinnTransformer)):
         pytest.skip(f"{ApproximateNNTransformer.__name__} is not available on Windows.")
+    if sys.version_info >= (3, 11) and issubclass(ApproximateNNTransformer, PuffinnTransformer):
+        pytest.skip(f"{ApproximateNNTransformer.__name__} is not available for Python 3.11+.")
     knn_metric = metric
     ann_metric = metric
     if issubclass(ApproximateNNTransformer, PuffinnTransformer) and metric in ["euclidean", "cosine"]:
