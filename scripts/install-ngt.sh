@@ -12,26 +12,7 @@ if [[ $(uname) == "Darwin" ]]; then
     echo "NGT already installed"
   else
     echo "Installing NGT under Mac OS X..."
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install cmake
-    brew install libomp
-    export LDFLAGS="-L/opt/homebrew/opt/libomp/lib"
-    export CPPFLAGS="-I/opt/homebrew/opt/libomp/include"
-    brew install gcc@13
-    export CC=/opt/homebrew/bin/gcc-13
-    export CXX=/opt/homebrew/bin/g++-13
-    pushd /tmp/
-    git clone https://github.com/yahoojapan/NGT
-    cd NGT/
-    mkdir build
-    cd build/
-    cmake ..
-    make
-    sudo make install
-    cd ../python
-    pip install .
-    popd
-    rm -r /tmp/NGT
+    brew install ngt
   fi
 
 elif [[ $(uname -s) == Linux* ]]; then
