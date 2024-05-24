@@ -177,9 +177,9 @@ class NMSlibTransformer(BaseEstimator, TransformerMixin):
         if nmslib is None:  # pragma: no cover
             raise ImportError(
                 "Please install the nmslib package before using NMSlibTransformer.\n"
-                "pip install nmslib\n"
-                "For best performance, install from sources:\n"
-                "pip install --no-binary :all: nmslib",
+                "git clone https://github.com/nmslib/nmslib.git\n"
+                "cd nmslib/python_bindings\n"
+                "pip install .",
             ) from None
 
         self.n_neighbors = n_neighbors
