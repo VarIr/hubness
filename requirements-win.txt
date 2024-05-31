@@ -1,12 +1,12 @@
 numpy
 scipy>=1.2
 scikit-learn
-pandas
 joblib>=0.12
 tqdm
 nmslib
 annoy
 # ngt  # DOES NOT support Windows
+# scann  # DOES NOT support Windows
 pytest
 pytest-cov
 codecov

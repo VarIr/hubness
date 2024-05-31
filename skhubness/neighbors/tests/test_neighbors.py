@@ -9,15 +9,21 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsTransformer, KNeighborsClassifier
 
-from skhubness.neighbors import AnnoyTransformer, NGTTransformer, NMSlibTransformer, PuffinnTransformer
+from skhubness.neighbors import AnnoyTransformer
+from skhubness.neighbors import NMSlibTransformer
+from skhubness.neighbors import NGTTransformer
+from skhubness.neighbors import PuffinnTransformer
+from skhubness.neighbors import ScaNNTransformer
+
+NON_WINDOWS = (NGTTransformer, PuffinnTransformer, ScaNNTransformer)
 
 
 @pytest.mark.parametrize("n_neighbors", [1, 5, 10])
 @pytest.mark.parametrize("metric", [None, "euclidean", "cosine"])
 @pytest.mark.parametrize("ApproximateNNTransformer",
-                         [AnnoyTransformer, NGTTransformer, NMSlibTransformer, PuffinnTransformer])
+                         [AnnoyTransformer, NGTTransformer, NMSlibTransformer, PuffinnTransformer, ScaNNTransformer])
 def test_ann_transformers_similar_to_exact_transformer(ApproximateNNTransformer, n_neighbors, metric):
-    if sys.platform == "win32" and issubclass(ApproximateNNTransformer, (NGTTransformer, PuffinnTransformer)):
+    if sys.platform == "win32" and issubclass(ApproximateNNTransformer, NON_WINDOWS):
         pytest.skip(f"{ApproximateNNTransformer.__name__} is not available on Windows.")
     knn_metric = metric
     ann_metric = metric
@@ -25,6 +31,8 @@ def test_ann_transformers_similar_to_exact_transformer(ApproximateNNTransformer,
         pytest.skip(f"{ApproximateNNTransformer.__name__} does not support metric={metric}")
     if issubclass(ApproximateNNTransformer, AnnoyTransformer) and metric == "cosine":
         ann_metric = "angular"
+    if issubclass(ApproximateNNTransformer, ScaNNTransformer) and metric == "cosine":
+        ann_metric = "dot_product"
     n_samples = 100
     X, y = make_classification(
         n_samples=n_samples,
@@ -57,9 +65,9 @@ def test_ann_transformers_similar_to_exact_transformer(ApproximateNNTransformer,
     # Neighbor graphs should be same class, same shape, same dtype
     assert ann_graph.__class__ == knn_graph.__class__
     assert ann_graph.shape == knn_graph.shape
-    assert ann_graph.dtype == knn_graph.dtype
+    assert ann_graph.dtype == knn_graph.dtype or ApproximateNNTransformer is ScaNNTransformer
     assert ann_graph.nnz == knn_graph.nnz
-    if issubclass(ApproximateNNTransformer, AnnoyTransformer):
+    if issubclass(ApproximateNNTransformer, (AnnoyTransformer, ScaNNTransformer)):
         pass  # Known inaccuracy
     elif issubclass(ApproximateNNTransformer, PuffinnTransformer) and metric is None:
         pass  # Known inaccuracy

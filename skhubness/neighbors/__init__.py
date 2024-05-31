@@ -9,6 +9,7 @@ from ._annoy import AnnoyTransformer, LegacyRandomProjectionTree
 from ._nmslib import NMSlibTransformer, LegacyHNSW
 from ._puffinn import PuffinnTransformer, LegacyPuffinn
 from ._ngt import NGTTransformer, LegacyNNG
+from ._scann import ScaNNTransformer
 
 
 __all__ = [
@@ -20,4 +21,5 @@ __all__ = [
     "NGTTransformer",
     "NMSlibTransformer",
     "PuffinnTransformer",
+    "ScaNNTransformer",
 ]
